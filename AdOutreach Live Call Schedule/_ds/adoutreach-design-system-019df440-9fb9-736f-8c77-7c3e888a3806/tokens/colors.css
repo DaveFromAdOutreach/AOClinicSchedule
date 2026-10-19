@@ -1,0 +1,69 @@
+/* AdOutreach — color tokens
+   Base values sampled from the official logo (navy #002435, teal #00A7B2,
+   lime #62F107) and adoutreach.com. */
+
+:root {
+  /* ---- Brand core (sampled) ---- */
+  --color-navy-900: #002435;   /* primary brand navy — headings, dark sections */
+  --color-teal-500: #00A7B2;   /* brand teal — gradient end, links, accents */
+  --color-lime-500: #62F107;   /* brand lime — gradient start, energy accent */
+  --color-green-500: #2ECD68;  /* gradient midpoint */
+
+  /* ---- Navy scale ---- */
+  --color-navy-950: #001622;
+  --color-navy-800: #06304A;
+  --color-navy-700: #0E425D;
+
+  /* ---- Teal scale ---- */
+  --color-teal-700: #00707A;
+  --color-teal-600: #008B94;
+  --color-teal-400: #2BC3CD;
+  --color-teal-100: #D6F4F6;
+
+  /* ---- Lime scale ---- */
+  --color-lime-600: #4CC70A;
+  --color-lime-400: #7FF53A;
+  --color-lime-100: #E9FDD9;
+
+  /* ---- Cool neutrals (navy-tinted) ---- */
+  --color-slate-700: #33505F;
+  --color-slate-500: #5E7A88;
+  --color-slate-300: #A9BEC7;
+  --color-slate-200: #CEDDE2;
+  --color-slate-100: #E6EFF2;
+  --color-slate-50:  #F3F8FA;
+  --color-white: #FFFFFF;
+
+  /* ---- Semantic status (pragmatic defaults, harmonized to brand) ---- */
+  --color-success: #2ECD68;
+  --color-warning: #FFB224;
+  --color-danger:  #E5484D;
+  --color-info:    #00A7B2;
+
+  /* ---- Gradients (lime → teal, bottom-left → top-right, as in the mark) ---- */
+  --gradient-brand: linear-gradient(60deg, #62F107 0%, #2ECD68 48%, #00A7B2 100%); /* @kind color */
+  --gradient-brand-vertical: linear-gradient(180deg, #62F107 0%, #00A7B2 100%); /* @kind color */
+  --gradient-navy: linear-gradient(180deg, #002435 0%, #001622 100%); /* @kind color */
+
+  /* ---- Semantic aliases ---- */
+  --text-heading: var(--color-navy-900);
+  --text-body: var(--color-slate-700);
+  --text-muted: var(--color-slate-500);
+  --text-inverse: var(--color-white);
+  --text-inverse-muted: #9FBDCB;
+  --text-link: var(--color-teal-600);
+  --text-accent: var(--color-teal-500);
+
+  --surface-page: var(--color-white);
+  --surface-subtle: var(--color-slate-50);
+  --surface-card: var(--color-white);
+  --surface-dark: var(--color-navy-900);
+  --surface-darker: var(--color-navy-950);
+  --surface-dark-raised: #0A3550;
+
+  --border-subtle: #E1EBEF;
+  --border-strong: var(--color-slate-200);
+  --border-on-dark: rgba(255, 255, 255, 0.14);
+
+  --focus-ring: 0 0 0 3px rgba(0, 167, 178, 0.35);
+}

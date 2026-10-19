@@ -1,0 +1,40 @@
+/* AdOutreach — typography tokens
+   One family (Poppins) at contrasting weights: 700/800 display, 400/500 body. */
+
+:root {
+  --font-display: 'Poppins', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Poppins', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+
+  /* Size scale (desktop) */
+  --font-size-hero: 64px;      /* hero headline */
+  --font-size-h1: 52px;
+  --font-size-h2: 40px;
+  --font-size-h3: 30px;
+  --font-size-h4: 24px;
+  --font-size-h5: 20px;
+  --font-size-body-lg: 19px;
+  --font-size-body: 17px;
+  --font-size-small: 15px;
+  --font-size-caption: 13px;
+
+  /* Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Line heights */
+  --line-height-display: 1.15;
+  --line-height-heading: 1.25;
+  --line-height-body: 1.65;
+  --line-height-tight: 1.4;
+
+  /* Letter spacing */
+  --letter-spacing-display: -0.02em;
+  --letter-spacing-heading: -0.01em;
+  --letter-spacing-body: 0;
+  --letter-spacing-button: 0.06em;   /* uppercase CTA buttons */
+  --letter-spacing-overline: 0.14em; /* uppercase eyebrows */
+}

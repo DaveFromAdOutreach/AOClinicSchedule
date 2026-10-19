@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#0B1B3A"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0B1B3A"/><g transform="translate(420 220)"><rect x="0" y="40" width="360" height="320" rx="36" fill="none" stroke="#17C3B2" stroke-width="28"/><line x1="0" y1="130" x2="360" y2="130" stroke="#17C3B2" stroke-width="28"/><line x1="100" y1="0" x2="100" y2="80" stroke="#B4F02E" stroke-width="28" stroke-linecap="round"/><line x1="260" y1="0" x2="260" y2="80" stroke="#B4F02E" stroke-width="28" stroke-linecap="round"/><rect x="70" y="190" width="80" height="60" rx="12" fill="#B4F02E"/><rect x="210" y="270" width="80" height="60" rx="12" fill="#17C3B2"/></g></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/tokens/base.css">
+  <link rel="stylesheet" href="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/styles.css">
+  <script src="_ds/adoutreach-design-system-019df440-9fb9-736f-8c77-7c3e888a3806/_ds_bundle.js"></script>
+  <style>html,body{margin:0;background:#fff}a{color:var(--text-link)}a:hover{color:var(--color-teal-500)}@keyframes aoPulse{0%{box-shadow:0 0 0 0 rgba(46,205,104,.6)}70%{box-shadow:0 0 0 8px rgba(46,205,104,0)}100%{box-shadow:0 0 0 0 rgba(46,205,104,0)}}</style>
+</helmet>
+<div ref="{{ rootRef }}" data-screen-label="Live Call Schedule" style="box-sizing:border-box; width:100%; max-width:1280px; margin:0 auto; padding:40px 20px 48px; display:flex; flex-direction:column; gap:28px; font-family:var(--font-body); color:var(--text-body)">
+
+  <sc-if value="{{ showHeader }}" hint-placeholder-val="{{ true }}">
+    <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.SectionHeading" align="left" eyebrow="Live Group Coaching" title="Live Call &amp; Clinic Schedule" accent="Schedule" sub="Join our coaches live every week for hands-on workshops, clinics and mastermind calls. Every time below updates automatically to your time zone." hint-size="100%,180px"></x-import>
+  </sc-if>
+
+  <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 32px; padding-bottom:24px; border-bottom:1px solid var(--border-subtle)">
+    <div style="display:flex; align-items:center; gap:14px; min-width:0">
+      <span style="width:44px; height:44px; flex:none; border-radius:50%; background:var(--gradient-brand); box-shadow:var(--shadow-glow-teal); display:inline-flex; align-items:center; justify-content:center; color:#fff">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+      </span>
+      <div style="display:flex; flex-direction:column; gap:2px; min-width:0">
+        <span style="font-family:var(--font-display); font-size:18px; font-weight:700; line-height:1.3; letter-spacing:-0.01em; color:var(--text-heading)">Showing times in {{ tzName }}</span>
+        <span style="font-size:14px; line-height:1.5; color:var(--text-muted)">{{ localNow }}</span>
+      </div>
+    </div>
+    <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Select" label="Change time zone" options="{{ tzOptions }}" value="{{ tz }}" onChange="{{ setTz }}" style="width:380px; max-width:100%" hint-size="380px,78px"></x-import>
+  </div>
+
+  <sc-if value="{{ upNext.show }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 28px; padding:18px 18px 18px 24px; border-radius:var(--radius-lg); background:var(--surface-dark); box-shadow:var(--shadow-md)">
+      <div style="display:flex; align-items:center; gap:10px; flex:none">
+        {{ upNext.dot }}
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-lime-500)">{{ upNext.label }}</span>
+      </div>
+      <div style="flex:1 1 360px; min-width:0; display:flex; flex-direction:column; gap:12px">
+        <sc-for list="{{ upNext.items }}" as="u" hint-placeholder-count="1">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px">
+            <div style="display:flex; flex-direction:column; gap:2px; min-width:0">
+              <span style="font-family:var(--font-display); font-size:18px; font-weight:700; line-height:1.3; letter-spacing:-0.01em; color:#fff">{{ u.title }}</span>
+              <span style="font-size:14px; line-height:1.5; color:var(--text-inverse-muted)">{{ u.when }} · <span style="color:#fff; font-weight:600">{{ u.countdown }}</span></span>
+            </div>
+            <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Button" size="md" onClick="{{ u.onJoin }}" hint-size="150px,44px">{{ u.btnLabel }}</x-import>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isColumns }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:8px; align-items:stretch">
+      <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+        <div style="min-width:0; min-height:320px; display:flex; flex-direction:column; gap:8px; padding:6px; border-radius:var(--radius-lg); border:2px solid transparent; background:{{ d.colBg }}">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:4px 6px; min-height:28px; padding:6px 6px 2px">
+            <span style="font-family:var(--font-display); font-size:16px; font-weight:700; letter-spacing:-0.01em; color:var(--text-heading)">{{ d.name }}</span>
+            <sc-if value="{{ d.isToday }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="navy" size="sm" hint-size="58px,21px">Today</x-import>
+            </sc-if>
+          </div>
+          <sc-for list="{{ d.events }}" as="c" hint-placeholder-count="2">
+            <div onClick="{{ c.onToggle }}" style="display:flex; flex-direction:column; gap:12px; padding:12px; border-radius:var(--radius-md); background:#fff; box-shadow:{{ c.cardShadow }}; opacity:{{ c.opacity }}; cursor:pointer; transition:transform 250ms cubic-bezier(0.16,1,0.3,1), box-shadow 250ms cubic-bezier(0.16,1,0.3,1)" style-hover="transform:translateY(-2px); box-shadow:var(--shadow-md)">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap; min-height:21px">
+                <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="{{ c.typeBadge }}" size="sm" hint-size="80px,21px">{{ c.type }}</x-import>
+                <sc-if value="{{ c.isLive }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="success" size="sm" hint-size="84px,21px">{{ liveDot }}Live now</x-import></sc-if>
+                <sc-if value="{{ c.isNext }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="outline" size="sm" hint-size="70px,21px">Up next</x-import></sc-if>
+                <sc-if value="{{ c.isEnded }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted)">Ended</span></sc-if>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px">
+                <span style="font-size:13px; font-weight:600; line-height:1.4; color:var(--color-teal-700); font-variant-numeric:tabular-nums">{{ c.timeLabel }}</span>
+                <span style="font-family:var(--font-display); font-size:16px; font-weight:700; line-height:1.3; letter-spacing:-0.01em; color:var(--text-heading); text-wrap:pretty">{{ c.title }}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; min-width:0">
+                <span style="flex:none; display:inline-flex; color:var(--color-slate-500)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+                <span style="flex:1; min-width:0; font-size:13px; color:var(--text-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ c.host }}</span>
+                <span style="flex:none; display:inline-flex; align-items:center; gap:2px; font-size:12px; font-weight:600; color:var(--text-link)">{{ c.detailsLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform:{{ c.chevron }}; transition:transform 250ms"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </div>
+              <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:1px solid var(--border-subtle)">
+                  <p style="margin:0; font-size:13px; line-height:1.6; color:var(--text-body); text-wrap:pretty">{{ c.description }}</p>
+                  <div style="display:flex; flex-wrap:wrap; gap:4px 12px; font-size:12px; color:var(--text-muted)">
+                    <span style="display:inline-flex; align-items:center; gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>{{ c.duration }}</span>
+                    <sc-if value="{{ c.etNote }}" hint-placeholder-val="{{ false }}"><span>{{ c.etNote }}</span></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+              <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Button" variant="{{ c.btnVariant }}" size="sm" full-width="{{ true }}" onClick="{{ c.onJoin }}" hint-size="100%,36px">{{ c.btnLabel }}</x-import>
+            </div>
+          </sc-for>
+          <sc-if value="{{ d.empty }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:24px 12px; border:1.5px dashed var(--border-strong); border-radius:var(--radius-md); font-size:13px; color:var(--text-muted); text-align:center">No live calls</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isTimetable }}" hint-placeholder-val="{{ false }}">
+    <div style="border-radius:var(--radius-lg); background:#fff; border:1px solid var(--border-subtle); box-shadow:var(--shadow-card); overflow:hidden">
+      <div style="display:grid; grid-template-columns:88px; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr)">
+        <div style="padding:16px 12px; background:var(--surface-subtle); display:flex; align-items:center; font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted)">{{ abbr }}</div>
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+          <div style="min-width:0; padding:16px 14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-left:1px solid var(--border-subtle); background:{{ d.cellBg }}">
+            <span style="font-family:var(--font-display); font-size:16px; font-weight:700; letter-spacing:-0.01em; color:var(--text-heading)">{{ d.name }}</span>
+            <sc-if value="{{ d.isToday }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="navy" size="sm" hint-size="58px,21px">Today</x-import></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
+        <div style="display:grid; grid-template-columns:88px; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); border-top:1px solid var(--border-subtle)">
+          <div style="padding:16px 12px; background:var(--surface-subtle); display:flex; flex-direction:column; gap:2px">
+            <span style="font-family:var(--font-display); font-size:20px; font-weight:700; line-height:1.1; letter-spacing:-0.01em; color:var(--text-heading); font-variant-numeric:tabular-nums">{{ r.time }}</span>
+            <span style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:var(--text-muted)">{{ r.suffix }}</span>
+          </div>
+          <sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="5">
+            <div style="min-width:0; padding:8px; display:flex; flex-direction:column; gap:8px; border-left:1px solid var(--border-subtle); background:{{ cell.bg }}">
+              <sc-for list="{{ cell.events }}" as="c" hint-placeholder-count="1">
+                <div onClick="{{ c.onToggle }}" style="display:flex; flex-direction:column; gap:10px; padding:10px; border-radius:var(--radius-md); background:#fff; box-shadow:{{ c.cardShadow }}; opacity:{{ c.opacity }}; cursor:pointer; transition:transform 250ms cubic-bezier(0.16,1,0.3,1), box-shadow 250ms cubic-bezier(0.16,1,0.3,1)" style-hover="transform:translateY(-2px); box-shadow:var(--shadow-md)">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap; min-height:21px">
+                    <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="{{ c.typeBadge }}" size="sm" hint-size="80px,21px">{{ c.type }}</x-import>
+                    <sc-if value="{{ c.isLive }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="success" size="sm" hint-size="84px,21px">{{ liveDot }}Live now</x-import></sc-if>
+                    <sc-if value="{{ c.isNext }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="outline" size="sm" hint-size="70px,21px">Up next</x-import></sc-if>
+                    <sc-if value="{{ c.isEnded }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted)">Ended</span></sc-if>
+                  </div>
+                  <span style="font-family:var(--font-display); font-size:15px; font-weight:700; line-height:1.3; letter-spacing:-0.01em; color:var(--text-heading); text-wrap:pretty">{{ c.title }}</span>
+                  <div style="display:flex; align-items:center; gap:8px; min-width:0; font-size:12.5px; color:var(--text-muted)">
+                    <span style="flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ c.host }} · {{ c.duration }}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none; color:var(--text-link); transform:{{ c.chevron }}; transition:transform 250ms"><path d="m6 9 6 6 6-6"></path></svg>
+                  </div>
+                  <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; flex-direction:column; gap:6px; padding-top:10px; border-top:1px solid var(--border-subtle)">
+                      <p style="margin:0; font-size:13px; line-height:1.6; color:var(--text-body); text-wrap:pretty">{{ c.description }}</p>
+                      <sc-if value="{{ c.etNote }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--text-muted)">{{ c.etNote }}</span></sc-if>
+                    </div>
+                  </sc-if>
+                  <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Button" variant="{{ c.btnVariant }}" size="sm" full-width="{{ true }}" onClick="{{ c.onJoin }}" hint-size="100%,36px">{{ c.btnLabel }}</x-import>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isTimegrid }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:6px 6px 10px; border-radius:var(--radius-lg); background:#fff; border:1px solid var(--border-subtle); box-shadow:var(--shadow-card)">
+      <div style="display:grid; grid-template-columns:64px; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:16px 10px 12px 0; display:flex; align-items:flex-end; justify-content:flex-end; font-size:11px; font-weight:700; letter-spacing:0.08em; color:var(--text-muted)">{{ abbr }}</div>
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+          <div style="min-width:0; padding:16px 12px 12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-left:1px solid var(--border-subtle); border-radius:12px 12px 0 0; background:{{ d.cellBg }}">
+            <span style="font-family:var(--font-display); font-size:15px; font-weight:700; letter-spacing:-0.01em; color:var(--text-heading)">{{ d.name }}</span>
+            <sc-if value="{{ d.isToday }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="navy" size="sm" hint-size="58px,21px">Today</x-import></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <sc-for list="{{ segs }}" as="s" hint-placeholder-count="1">
+        <sc-if value="{{ s.gapBefore }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid; grid-template-columns:64px minmax(0,1fr); align-items:center; height:30px">
+            <span style="padding-right:10px; text-align:right; font-size:11px; font-weight:600; color:var(--text-muted)">{{ s.gapLabel }}</span>
+            <span style="height:0; border-top:2px dashed var(--border-strong)"></span>
+          </div>
+        </sc-if>
+        <div style="display:grid; grid-template-columns:64px; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); height:{{ s.height }}px; border-bottom:1px solid var(--border-subtle)">
+          <div style="position:relative">
+            <sc-for list="{{ s.hours }}" as="h" hint-placeholder-count="4">
+              <span style="position:absolute; right:10px; top:{{ h.top }}px; font-size:11.5px; font-weight:500; line-height:1; color:var(--text-muted); white-space:nowrap; font-variant-numeric:tabular-nums">{{ h.label }}</span>
+            </sc-for>
+          </div>
+          <sc-for list="{{ s.cols }}" as="col" hint-placeholder-count="5">
+            <div style="position:relative; min-width:0; border-left:1px solid var(--border-subtle); background-color:{{ col.bg }}; background-image:repeating-linear-gradient(180deg, var(--border-subtle) 0px, var(--border-subtle) 1px, transparent 1px, transparent {{ col.hp }}px)">
+              <sc-for list="{{ col.blocks }}" as="b" hint-placeholder-count="1">
+                <div data-ao-pop="1" style="position:absolute; top:{{ b.top }}px; height:{{ b.height }}px; left:calc({{ b.left }}% + 4px); width:calc({{ b.width }}% - 8px); z-index:{{ b.z }}">
+                  <div onClick="{{ b.onOpen }}" style="box-sizing:border-box; height:100%; display:flex; flex-direction:column; gap:3px; padding:{{ b.pad }}; border-radius:10px; overflow:hidden; cursor:pointer; background:{{ b.bg }}; box-shadow:{{ b.ring }}; opacity:{{ b.opacity }}; transition:transform 150ms cubic-bezier(0.16,1,0.3,1)" style-hover="transform:translateY(-1px)">
+                    <span style="display:flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; line-height:1.3; color:{{ b.sub }}; font-variant-numeric:tabular-nums; white-space:nowrap">{{ b.dot }}{{ b.startLabel }}</span>
+                    <span lang="en" style="font-family:var(--font-display); font-size:{{ b.titleSize }}px; font-weight:700; line-height:1.25; letter-spacing:-0.005em; color:{{ b.ink }}; hyphens:manual">{{ b.title }}</span>
+                  </div>
+                  <sc-if value="{{ b.isOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute; top:{{ b.popTop }}; bottom:{{ b.popBottom }}; left:{{ b.popLeft }}; right:{{ b.popRight }}; width:320px; box-sizing:border-box; padding:20px; display:flex; flex-direction:column; gap:14px; background:#fff; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg), 0 0 0 1px var(--border-subtle); cursor:default">
+                      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
+                        <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="{{ b.typeBadge }}" size="sm" hint-size="80px,21px">{{ b.type }}</x-import>
+                        <sc-if value="{{ b.isLive }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="success" size="sm" hint-size="84px,21px">{{ liveDot }}Live now</x-import></sc-if>
+                        <sc-if value="{{ b.isNext }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="outline" size="sm" hint-size="70px,21px">Up next</x-import></sc-if>
+                        <span style="flex:1"></span>
+                        <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.IconButton" variant="ghost" size="sm" aria-label="Close" onClick="{{ closePop }}" hint-size="34px,34px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></x-import>
+                      </div>
+                      <span style="font-family:var(--font-display); font-size:19px; font-weight:700; line-height:1.25; letter-spacing:-0.01em; color:var(--text-heading); text-wrap:pretty">{{ b.title }}</span>
+                      <div style="display:flex; flex-direction:column; gap:8px; font-size:13.5px; line-height:1.4; color:var(--text-body)">
+                        <span style="display:flex; align-items:center; gap:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal-600)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>{{ b.when }}</span>
+                        <span style="display:flex; align-items:center; gap:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal-600)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>{{ b.host }}</span>
+                      </div>
+                      <p style="margin:0; font-size:13.5px; line-height:1.6; color:var(--text-body); text-wrap:pretty">{{ b.description }}</p>
+                      <sc-if value="{{ b.etNote }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--text-muted)">Scheduled {{ b.etNote }}</span></sc-if>
+                      <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Button" size="md" full-width="{{ true }}" onClick="{{ b.onJoin }}" hint-size="100%,44px">{{ b.btnLabel }}</x-import>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ col.hasNow }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; left:-1px; right:0; top:{{ col.nowTop }}px; height:2px; background:var(--color-teal-500); z-index:4; pointer-events:none">
+                  <span style="position:absolute; left:-5px; top:-4px; width:10px; height:10px; border-radius:50%; background:var(--color-teal-500)"></span>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isAgenda }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex; flex-direction:column; gap:28px">
+      <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <div style="display:flex; align-items:center; gap:10px">
+            <span style="font-family:var(--font-display); font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--text-heading)">{{ d.name }}</span>
+            <sc-if value="{{ d.isToday }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="navy" size="sm" hint-size="58px,21px">Today</x-import></sc-if>
+            <span style="flex:1; height:1px; background:var(--border-subtle)"></span>
+          </div>
+          <sc-for list="{{ d.events }}" as="c" hint-placeholder-count="2">
+            <div onClick="{{ c.onToggle }}" style="display:grid; grid-template-columns:64px minmax(0,1fr); gap:14px; padding:16px 16px 16px 14px; border-radius:var(--radius-lg); background:#fff; box-shadow:{{ c.cardShadow }}; opacity:{{ c.opacity }}; cursor:pointer">
+              <div style="display:flex; flex-direction:column; gap:2px; padding-top:1px">
+                <span style="font-family:var(--font-display); font-size:19px; font-weight:700; line-height:1.15; letter-spacing:-0.01em; color:var(--text-heading); font-variant-numeric:tabular-nums">{{ c.startShort }}</span>
+                <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--text-muted)">{{ c.startSuffix }}</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px; min-width:0">
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; min-height:21px">
+                  <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="{{ c.typeBadge }}" size="sm" hint-size="80px,21px">{{ c.type }}</x-import>
+                  <sc-if value="{{ c.isLive }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="success" size="sm" hint-size="84px,21px">{{ liveDot }}Live now</x-import></sc-if>
+                  <sc-if value="{{ c.isNext }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Badge" variant="outline" size="sm" hint-size="70px,21px">Up next</x-import></sc-if>
+                  <sc-if value="{{ c.isEnded }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted)">Ended</span></sc-if>
+                </div>
+                <span style="font-family:var(--font-display); font-size:16px; font-weight:700; line-height:1.3; letter-spacing:-0.01em; color:var(--text-heading); text-wrap:pretty">{{ c.title }}</span>
+                <div style="display:flex; align-items:center; gap:8px; min-width:0; font-size:13px; color:var(--text-muted)">
+                  <span style="flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ c.host }} · {{ c.timeRange }}</span>
+                  <span style="flex:none; display:inline-flex; align-items:center; gap:2px; font-size:12px; font-weight:600; color:var(--text-link)">{{ c.detailsLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform:{{ c.chevron }}; transition:transform 250ms"><path d="m6 9 6 6 6-6"></path></svg></span>
+                </div>
+                <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; flex-direction:column; gap:6px; padding-top:10px; border-top:1px solid var(--border-subtle)">
+                    <p style="margin:0; font-size:13.5px; line-height:1.6; color:var(--text-body); text-wrap:pretty">{{ c.description }}</p>
+                    <sc-if value="{{ c.etNote }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--text-muted)">{{ c.etNote }}</span></sc-if>
+                  </div>
+                </sc-if>
+                <x-import component-from-global-scope="AdOutreachDesignSystem_019df4.Button" variant="{{ c.btnVariant }}" size="sm" full-width="{{ true }}" onClick="{{ c.onJoin }}" hint-size="100%,36px">{{ c.btnLabel }}</x-import>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ d.empty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:14px 16px; border:1.5px dashed var(--border-strong); border-radius:var(--radius-md); font-size:13.5px; color:var(--text-muted)">No live calls this day</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <p style="margin:0; font-size:13px; line-height:1.6; color:var(--text-muted); text-wrap:pretty">{{ footNote }}</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Day columns&quot;,&quot;Timetable&quot;,&quot;Time grid&quot;],&quot;default&quot;:&quot;Day columns&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showHeader&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showUpNext&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showStatus&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;timeFormat&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;12-hour&quot;,&quot;24-hour&quot;],&quot;default&quot;:&quot;12-hour&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+const ET = 'America/New_York';
+const MIN = 60000;
+const DAY = 86400000;
+const HOUR_PX = 76;
+const LS_KEY = 'ao-live-schedule-tz-v2';
+const TBD = 'Event description goes here — what this call covers, who it’s for, and what to bring.';
+
+// Weekly schedule. day: 1 = Monday … 5 = Friday · time: 24h, US Eastern · duration in minutes.
+// Swap in real host / description / joinUrl when ready.
+const EVENTS = [
+  { id: 'ads-optimization', title: 'Ads Optimization Workshop', type: 'Workshop', day: 1, time: '16:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'copy-funnels', title: 'Copy & Funnels Clinic', type: 'Clinic', day: 2, time: '11:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'conversion-tracking', title: 'Conversion Tracking Workshop', type: 'Workshop', day: 2, time: '16:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'ads-launch', title: 'Ads Launch Workshop', type: 'Workshop', day: 3, time: '11:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'sales', title: 'Sales Clinic', type: 'Clinic', day: 3, time: '11:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'meta-ads', title: 'Meta Ads Clinic', type: 'Clinic', day: 3, time: '16:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'youtube-channel', title: 'YouTube Channel Clinic', type: 'Clinic', day: 4, time: '11:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'targeting-audience', title: 'Targeting & Audience Creation Workshop', type: 'Workshop', day: 4, time: '16:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+  { id: 'ai-mastermind', title: 'AI Mastermind Call', type: 'Mastermind', day: 5, time: '13:00', duration: 60, host: 'Host Name', description: TBD, joinUrl: '' },
+];
+
+const TYPES = {
+  Workshop: { badge: 'teal', bg: 'var(--color-teal-100)', ink: 'var(--text-heading)', sub: 'var(--color-teal-700)' },
+  Clinic: { badge: 'lime', bg: 'var(--color-lime-100)', ink: 'var(--text-heading)', sub: '#2E7005' },
+  Mastermind: { badge: 'navy', bg: 'var(--color-navy-900)', ink: '#fff', sub: 'var(--color-lime-500)' },
+};
+
+const ZONES = [
+  ['Pacific/Honolulu', 'Hawaii'],
+  ['America/Anchorage', 'Alaska'],
+  ['America/Los_Angeles', 'Pacific Time (US & Canada)'],
+  ['America/Phoenix', 'Arizona'],
+  ['America/Denver', 'Mountain Time (US & Canada)'],
+  ['America/Chicago', 'Central Time (US & Canada)'],
+  ['America/Mexico_City', 'Mexico City'],
+  ['America/New_York', 'Eastern Time (US & Canada)'],
+  ['America/Bogota', 'Bogotá, Lima'],
+  ['America/Halifax', 'Atlantic Time (Canada)'],
+  ['America/St_Johns', 'Newfoundland'],
+  ['America/Sao_Paulo', 'São Paulo'],
+  ['America/Argentina/Buenos_Aires', 'Buenos Aires'],
+  ['Etc/UTC', 'Coordinated Universal Time'],
+  ['Europe/London', 'London, Dublin, Lisbon'],
+  ['Africa/Lagos', 'Lagos'],
+  ['Europe/Paris', 'Paris, Berlin, Madrid, Rome'],
+  ['Africa/Johannesburg', 'Johannesburg'],
+  ['Europe/Athens', 'Athens, Helsinki, Bucharest'],
+  ['Africa/Nairobi', 'Nairobi'],
+  ['Asia/Dubai', 'Dubai, Abu Dhabi'],
+  ['Asia/Karachi', 'Karachi'],
+  ['Asia/Kolkata', 'India (Mumbai, New Delhi)'],
+  ['Asia/Bangkok', 'Bangkok, Jakarta'],
+  ['Asia/Singapore', 'Singapore, Kuala Lumpur'],
+  ['Asia/Manila', 'Manila'],
+  ['Australia/Perth', 'Perth'],
+  ['Asia/Tokyo', 'Tokyo, Seoul'],
+  ['Australia/Brisbane', 'Brisbane'],
+  ['Australia/Sydney', 'Sydney, Melbourne'],
+  ['Pacific/Auckland', 'Auckland'],
+];
+
+const DAY_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const TINT = 'color-mix(in srgb, var(--color-teal-100) 55%, #fff)';
+const TODAY_RING = `linear-gradient(${TINT}, ${TINT}) padding-box, var(--gradient-brand) border-box`;
+
+const DTF = {};
+function parts(ts, tz) {
+  const f = DTF[tz] || (DTF[tz] = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }));
+  const o = {};
+  f.formatToParts(new Date(ts)).forEach(x => { o[x.type] = x.value; });
+  const y = +o.year, m = +o.month, d = +o.day, h = +o.hour % 24, mi = +o.minute;
+  return { y, m, d, h, mi, mins: h * 60 + mi, key: y * 10000 + m * 100 + d, dow: new Date(Date.UTC(y, m - 1, d)).getUTCDay() };
+}
+function offsetMin(ts, tz) {
+  const p = parts(ts, tz);
+  return Math.round((Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi) - Math.floor(ts / MIN) * MIN) / MIN);
+}
+function zonedToUtc(y, m, d, h, mi, tz) {
+  const guess = Date.UTC(y, m - 1, d, h, mi);
+  const o1 = offsetMin(guess, tz);
+  let ts = guess - o1 * MIN;
+  const o2 = offsetMin(ts, tz);
+  if (o2 !== o1) ts = guess - o2 * MIN;
+  return ts;
+}
+function validTz(tz) { try { new Intl.DateTimeFormat('en-US', { timeZone: tz }); return true; } catch (e) { return false; } }
+function detectTz() {
+  try { let d = Intl.DateTimeFormat().resolvedOptions().timeZone; if (d === 'UTC') d = 'Etc/UTC'; if (d && validTz(d)) return d; } catch (e) {}
+  return ET;
+}
+function initialTz(detected) {
+  try { const s = localStorage.getItem(LS_KEY); if (s && validTz(s)) return s; } catch (e) {}
+  return detected;
+}
+function tzAbbr(ts, tz) {
+  try { const p = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'short' }).formatToParts(new Date(ts)).find(x => x.type === 'timeZoneName'); return p ? p.value : ''; } catch (e) { return ''; }
+}
+const pad = n => String(n).padStart(2, '0');
+const cityOf = tz => tz.split('/').pop().replace(/_/g, ' ');
+const toMins = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+function gmt(off) {
+  if (!off) return 'GMT';
+  const a = Math.abs(off), h = Math.floor(a / 60), m = a % 60;
+  return 'GMT' + (off < 0 ? '-' : '+') + h + (m ? ':' + pad(m) : '');
+}
+function tParts(mins, f24) {
+  const h = Math.floor(mins / 60) % 24, mi = mins % 60;
+  return f24 ? { t: pad(h) + ':' + pad(mi), s: '' } : { t: (h % 12 || 12) + ':' + pad(mi), s: h < 12 ? 'AM' : 'PM' };
+}
+function tStr(mins, f24) { const p = tParts(mins, f24); return p.s ? p.t + ' ' + p.s : p.t; }
+function rangeStr(a, b, f24) {
+  const x = tParts(a, f24), y = tParts(b, f24);
+  if (f24) return x.t + ' – ' + y.t;
+  return x.s === y.s ? `${x.t} – ${y.t} ${y.s}` : `${x.t} ${x.s} – ${y.t} ${y.s}`;
+}
+function hourLabel(mins, f24) { const h = Math.floor(mins / 60) % 24; return f24 ? pad(h) + ':00' : (h % 12 || 12) + ' ' + (h < 12 ? 'AM' : 'PM'); }
+function durStr(ms) {
+  const t = Math.max(1, Math.ceil(ms / MIN)), d = Math.floor(t / 1440), h = Math.floor((t % 1440) / 60), m = t % 60;
+  return d ? `${d}d ${h}h` : h ? `${h}h ${m}m` : `${m} min`;
+}
+function dot(color, size, live) {
+  return React.createElement('span', { style: { width: size, height: size, flex: 'none', display: 'inline-block', borderRadius: '50%', background: color, animation: live ? 'aoPulse 1.8s ease-out infinite' : 'none' } });
+}
+
+class Component extends DCLogic {
+  offset = (() => { try { const q = new URLSearchParams(window.location.search).get('now'); const t = q ? Date.parse(q) : NaN; return isNaN(t) ? 0 : t - Date.now(); } catch (e) { return 0; } })();
+  detected = detectTz();
+  rootRef = React.createRef();
+  state = { tz: initialTz(this.detected), now: Date.now() + this.offset, w: typeof window !== 'undefined' ? window.innerWidth : 1200, open: {}, pop: null, flash: null };
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.setState({ now: Date.now() + this.offset }), 30000);
+    this.measure = () => {
+      const el = this.rootRef.current || document.querySelector('[data-screen-label="Live Call Schedule"]');
+      if (el && window.ResizeObserver && this.roEl !== el) { if (this.ro) this.ro.disconnect(); this.ro = new ResizeObserver(() => this.measure()); this.ro.observe(el); this.roEl = el; }
+      const w = Math.round(el ? el.getBoundingClientRect().width : document.documentElement.clientWidth);
+      if (w && w !== this.state.w) this.setState({ w });
+    };
+    this.measure();
+    window.addEventListener('resize', this.measure);
+    this.raf = requestAnimationFrame(() => this.measure());
+    this.onDown = (e) => { if (this.state.pop && !(e.target.closest && e.target.closest('[data-ao-pop]'))) this.setState({ pop: null }); };
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.pop) this.setState({ pop: null }); };
+    document.addEventListener('mousedown', this.onDown);
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentDidUpdate() { if (!this.roEl && this.measure) this.measure(); }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearTimeout(this.ft); cancelAnimationFrame(this.raf);
+    if (this.ro) this.ro.disconnect();
+    window.removeEventListener('resize', this.measure);
+    document.removeEventListener('mousedown', this.onDown);
+    document.removeEventListener('keydown', this.onKey);
+  }
+
+  setTz = (v) => { this.setState({ tz: v, pop: null }); try { localStorage.setItem(LS_KEY, v); } catch (e) {} };
+  closePop = () => this.setState({ pop: null });
+  toggle(id) { return () => this.setState(s => ({ open: { ...s.open, [id]: !s.open[id] } })); }
+  openPop(id) { return () => this.setState(s => ({ pop: s.pop === id ? null : id })); }
+  join(ev) {
+    return (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      if (ev.joinUrl) { window.open(ev.joinUrl, '_blank', 'noopener'); return; }
+      clearTimeout(this.ft);
+      this.setState({ flash: ev.id });
+      this.ft = setTimeout(() => this.setState({ flash: null }), 1800);
+    };
+  }
+
+  renderVals() {
+    const P = this.props || {};
+    const layout = ['Day columns', 'Timetable', 'Time grid'].includes(P.layout) ? P.layout : 'Day columns';
+    const f24 = P.timeFormat === '24-hour';
+    const showStatus = P.showStatus ?? true;
+    const { tz, now, w, open, pop, flash } = this.state;
+    const today = parts(now, tz), tomorrow = parts(now + DAY, tz);
+    const zone = ZONES.find(z => z[0] === tz);
+    const tzName = zone ? zone[1] : cityOf(tz);
+    const tzOff = gmt(offsetMin(now, tz));
+    const abbr = tzAbbr(now, tz);
+
+    // Every occurrence from 2 days ago to 8 days ahead (ET calendar), DST-correct.
+    const et = parts(now, ET), etDay = Date.UTC(et.y, et.m - 1, et.d), occ = [];
+    for (let k = -2; k <= 8; k++) {
+      const dt = new Date(etDay + k * DAY);
+      EVENTS.forEach(ev => {
+        if (ev.day !== dt.getUTCDay()) return;
+        const [hh, mm] = ev.time.split(':').map(Number);
+        const start = zonedToUtc(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate(), hh, mm, ET);
+        occ.push({ ev, start, end: start + ev.duration * MIN });
+      });
+    }
+    occ.sort((a, b) => a.start - b.start);
+
+    const items = EVENTS.map(ev => {
+      const mine = occ.filter(o => o.ev === ev);
+      const cur = mine.find(o => o.end > now) || mine[mine.length - 1];
+      const ended = mine.some(o => o.end <= now && parts(o.start, tz).key === today.key);
+      return { ev, start: cur.start, end: cur.end, sp: parts(cur.start, tz), live: cur.start <= now && now < cur.end, ended };
+    });
+    const upcoming = items.filter(i => !i.live).sort((a, b) => a.start - b.start);
+    const nextStart = upcoming.length ? upcoming[0].start : null;
+    const liveDot = dot('var(--color-green-500)', 7, true);
+
+    // Columns = Mon–Fri, plus Sat/Sun only when a time zone pushes a call onto them.
+    const dows = new Set(items.map(i => i.sp.dow));
+    const order = [...(dows.has(0) ? [0] : []), 1, 2, 3, 4, 5, ...(dows.has(6) ? [6] : [])];
+    const n = order.length;
+    // Usable card width per layout; below the floor, fall back to the stacked agenda.
+    const inner = layout === 'Timetable' ? (w - 130) / n - 36 : layout === 'Time grid' ? (w - 118) / n : (w - 40 - 8 * (n - 1)) / n - 40;
+    const narrow = layout === 'Time grid' ? inner < 136 : inner < 106;
+    const wide = narrow || layout === 'Time grid' || inner >= 165;
+    const roomy = wide || inner >= 130;
+
+    const cards = items.map(i => {
+      const ev = i.ev, T = TYPES[ev.type] || TYPES.Workshop;
+      const st = !showStatus ? '' : i.live ? 'live' : i.ended ? 'ended' : i.start === nextStart ? 'next' : '';
+      const sm = i.sp.mins, tp = tParts(sm, f24), isOpen = !!open[ev.id];
+      return {
+        key: ev.id, id: ev.id, i, T, mins: sm, dur: ev.duration,
+        title: ev.title, type: ev.type, typeBadge: T.badge, host: ev.host || 'Host Name', description: ev.description || TBD, duration: ev.duration + ' min',
+        timeRange: rangeStr(sm, sm + ev.duration, f24), startShort: tp.t, startSuffix: tp.s,
+        isLive: st === 'live', isNext: st === 'next', isEnded: st === 'ended',
+        opacity: st === 'ended' ? 0.55 : 1,
+        cardBorder: st === 'live' ? 'var(--color-green-500)' : 'transparent',
+        cardShadow: st === 'live' ? '0 0 0 2px var(--color-green-500), var(--shadow-glow-lime)' : 'var(--shadow-sm)',
+        timeLabel: narrow || inner >= 150 ? rangeStr(sm, sm + ev.duration, f24) : tStr(sm, f24),
+        btnVariant: st === 'live' || st === 'next' ? 'primary' : 'outline',
+        btnLabel: flash === ev.id ? (roomy ? 'Coming Soon' : 'Soon') : st === 'live' ? (wide ? 'Join Live Now' : roomy ? 'Join Live' : 'Join') : (roomy ? 'Join Call' : 'Join'),
+        open: isOpen, detailsLabel: narrow || inner >= 170 ? (isOpen ? 'Less' : 'Details') : '', chevron: isOpen ? 'rotate(180deg)' : 'none',
+        etNote: tz === ET ? '' : DAY_SHORT[ev.day] + ' ' + tStr(toMins(ev.time), f24) + ' ET',
+        onToggle: this.toggle(ev.id), onJoin: this.join(ev),
+      };
+    });
+
+    const days = order.map(dow => {
+      const events = cards.filter(c => c.i.sp.dow === dow).sort((a, b) => a.mins - b.mins || a.title.localeCompare(b.title));
+      const isToday = showStatus && dow === today.dow;
+      return { key: 'd' + dow, dow, name: DAY_LONG[dow], isToday, events, empty: !events.length, colBg: isToday ? TODAY_RING : 'var(--surface-subtle)', cellBg: isToday ? TINT : '#fff' };
+    });
+
+    const slots = [...new Set(cards.map(c => c.mins))].sort((a, b) => a - b);
+    const rows = slots.map(m => {
+      const tp = tParts(m, f24);
+      return { key: 'r' + m, time: tp.t, suffix: tp.s, cells: days.map(d => ({ key: d.key + 'r' + m, bg: d.cellBg, events: d.events.filter(c => c.mins === m) })) };
+    });
+
+    // Time grid: merge busy hours into segments; collapse gaps longer than 2h.
+    const merged = [];
+    cards.map(c => [c.mins, c.mins + c.dur]).sort((a, b) => a[0] - b[0]).forEach(([s, e]) => {
+      const L = merged[merged.length - 1];
+      if (L && s - L[1] <= 120) L[1] = Math.max(L[1], e); else merged.push([s, e]);
+    });
+    const half = Math.ceil(days.length / 2);
+    const hp = layout === 'Time grid' && inner < 200 ? 104 : HOUR_PX; // taller hours when narrow columns wrap titles to 3 lines
+    const segs = merged.map(([s0, e0], si) => {
+      const from = Math.floor(s0 / 60) * 60, to = Math.ceil(e0 / 60) * 60, height = (to - from) / 60 * hp;
+      const isLast = si === merged.length - 1;
+      const hours = [];
+      for (let m = from; m < to; m += 60) hours.push({ key: 'h' + m, label: hourLabel(m, f24), top: (m - from) / 60 * hp + 7 });
+      const cols = days.map((d, di) => {
+        const evs = d.events.filter(c => c.mins >= from && c.mins < to).map(c => ({ c, s: c.mins, e: c.mins + c.dur }));
+        const clusters = []; let cl = null;
+        evs.forEach(x => { if (cl && x.s < cl.end) { cl.items.push(x); cl.end = Math.max(cl.end, x.e); } else { cl = { items: [x], end: x.e }; clusters.push(cl); } });
+        clusters.forEach(k => {
+          const ends = [];
+          k.items.forEach(x => { let li = ends.findIndex(v => v <= x.s); if (li < 0) { li = ends.length; ends.push(x.e); } else ends[li] = x.e; x.lane = li; });
+          k.items.forEach(x => { x.lanes = ends.length; });
+        });
+        const blocks = evs.map(x => {
+          const c = x.c, top = (x.s - from) / 60 * hp, isOpen = pop === c.id, left = di >= half, low = isLast && top > height / 2;
+          return {
+            ...c, key: 'b' + c.id, top: top + 2, height: Math.max(30, (x.e - x.s) / 60 * hp - 4), left: x.lane / x.lanes * 100, width: 100 / x.lanes,
+            z: isOpen ? 30 : 2, titleSize: Math.max(10.5, Math.min(x.lanes > 1 ? 12.5 : 13.5, Math.floor(2 * (inner / x.lanes - 8 - (x.lanes > 1 ? 14 : 20)) / (Math.max(...c.title.split(/\s+/).map(s => s.length)) * 0.66)) / 2)), pad: x.lanes > 1 ? '7px 7px' : '8px 10px', bg: c.T.bg, ink: c.T.ink, sub: c.T.sub, startLabel: tStr(x.s, f24), dot: c.isLive ? liveDot : null,
+            ring: c.isLive ? '0 0 0 2px #fff, 0 0 0 4px var(--color-green-500)' : c.isNext ? '0 0 0 2px #fff, 0 0 0 4px var(--color-navy-900)' : 'none',
+            isOpen, onOpen: this.openPop(c.id),
+            popLeft: left ? 'auto' : 'calc(100% + 10px)', popRight: left ? 'calc(100% + 10px)' : 'auto',
+            popTop: low ? 'auto' : '0px', popBottom: low ? '0px' : 'auto',
+            when: `${d.name} · ${c.timeRange} ${abbr}`,
+          };
+        });
+        const hasNow = d.isToday && today.mins >= from && today.mins < to;
+        return { key: d.key + 's' + si, bg: d.isToday ? TINT : 'transparent', blocks, hasNow, nowTop: (today.mins - from) / 60 * hp, hp };
+      });
+      const gap = si > 0 ? from - Math.ceil(merged[si - 1][1] / 60) * 60 : 0;
+      return { key: 's' + si, height, hours, cols, gapBefore: si > 0, gapLabel: gap >= 60 ? Math.round(gap / 60) + ' hrs' : '' };
+    });
+
+    const liveNow = items.filter(i => i.live);
+    const soonest = liveNow.length ? liveNow : upcoming.filter(i => i.start === nextStart);
+    const upNext = {
+      show: P.showUpNext ?? true,
+      label: liveNow.length ? 'Live now' : 'Up next',
+      dot: dot('var(--color-lime-500)', 10, liveNow.length > 0),
+      items: soonest.map(i => {
+        const c = cards[items.indexOf(i)];
+        const dayWord = i.sp.key === today.key ? 'Today' : i.sp.key === tomorrow.key ? 'Tomorrow' : `${DAY_LONG[i.sp.dow]}, ${MONTHS[i.sp.m - 1]} ${i.sp.d}`;
+        return { key: 'u' + c.id, title: c.title, when: `${dayWord} · ${c.timeRange} ${abbr}`, countdown: i.live ? 'Live now · ends in ' + durStr(i.end - now) : 'Starts in ' + durStr(i.start - now), onJoin: c.onJoin, btnLabel: flash === c.id ? 'Coming Soon' : i.live ? 'Join Live Now' : 'Join Call' };
+      }),
+    };
+
+    const ids = ZONES.map(z => z[0]);
+    const extra = [this.detected, tz].filter((id, n, arr) => id && !ids.includes(id) && arr.indexOf(id) === n);
+    const tzOptions = ZONES.map(([id, name]) => ({ id, name }))
+      .concat(extra.map(id => ({ id, name: cityOf(id) })))
+      .map(o => ({ ...o, off: offsetMin(now, o.id), name: o.id === this.detected ? o.name + ' · Detected' : o.name }))
+      .sort((a, b) => a.off - b.off || a.name.localeCompare(b.name))
+      .map(o => ({ value: o.id, label: `(${gmt(o.off)}) ${o.name}` }));
+
+    return {
+      rootRef: this.rootRef,
+      showHeader: P.showHeader ?? true,
+      isColumns: !narrow && layout === 'Day columns',
+      isTimetable: !narrow && layout === 'Timetable',
+      isTimegrid: !narrow && layout === 'Time grid',
+      isAgenda: narrow,
+      tz, tzName, abbr, tzOptions, setTz: this.setTz,
+      localNow: `Your local time is ${tStr(today.mins, f24)} on ${DAY_LONG[today.dow]} · ${tzOff}`,
+      footNote: tz === ET ? 'All calls repeat every week. Times are shown in Eastern Time (ET).' : `All calls repeat every week and are scheduled in Eastern Time (ET). Times above are converted to ${tzName} (${tzOff}).`,
+      days, rows, segs, upNext, liveDot, closePop: this.closePop,
+    };
+  }
+}
+</script>
+</body>
+</html>
