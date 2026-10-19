@@ -1,0 +1,23 @@
+/* AdOutreach — elevation, motion & effects tokens */
+
+:root {
+  /* Shadows — soft, diffuse, navy-tinted (never harsh black) */
+  --shadow-sm: 0 2px 8px rgba(0, 36, 53, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 36, 53, 0.10);
+  --shadow-lg: 0 20px 48px rgba(0, 36, 53, 0.14);
+  --shadow-card: 0 10px 32px rgba(0, 36, 53, 0.09);
+
+  /* Brand glows — for gradient CTAs on light & dark surfaces */
+  --shadow-glow-lime: 0 8px 28px rgba(98, 241, 7, 0.30);
+  --shadow-glow-teal: 0 8px 28px rgba(0, 167, 178, 0.35);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --duration-fast: 150ms; /* @kind other */
+  --duration-base: 250ms; /* @kind other */
+  --duration-slow: 450ms; /* @kind other */
+
+  /* Hover lift used on cards & buttons */
+  --hover-lift: translateY(-2px); /* @kind other */
+}
